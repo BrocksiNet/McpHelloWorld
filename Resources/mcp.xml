@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mcp>
+    <mcp-tools>
+        <mcp-tool name="hello" url="http://host.docker.internal:3333/mcp/hello">
+            <label>Hello World</label>
+            <description>Returns a hello world greeting</description>
+            <input-schema>
+                <property name="name" type="string" description="Name to greet" required="false"/>
+            </input-schema>
+        </mcp-tool>
+    </mcp-tools>
+</mcp>

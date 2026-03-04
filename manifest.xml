@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/Framework/App/Manifest/Schema/manifest-3.0.xsd">
+    <meta>
+        <name>McpHelloWorld</name>
+        <label>MCP Hello World</label>
+        <description>A minimal app to test MCP tool integration</description>
+        <author>shopware AG</author>
+        <copyright>(c) by shopware AG</copyright>
+        <version>1.0.0</version>
+        <license>MIT</license>
+    </meta>
+    <setup>
+        <registrationUrl>http://host.docker.internal:3333/register</registrationUrl>
+        <secret>test-secret-for-mcp-hello-world</secret>
+    </setup>
+</manifest>
