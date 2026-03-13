@@ -8,5 +8,32 @@
                 <property name="name" type="string" description="Name to greet" required="false"/>
             </input-schema>
         </mcp-tool>
+        <mcp-tool name="ping" url="http://host.docker.internal:3333/mcp/ping">
+            <label>Ping</label>
+            <description>Returns a pong response with an optional message echo</description>
+            <input-schema>
+                <property name="message" type="string" description="Optional message to echo back" required="false"/>
+            </input-schema>
+        </mcp-tool>
     </mcp-tools>
+    <mcp-prompts>
+        <mcp-prompt name="greeting-context" url="http://host.docker.internal:3333/mcp/prompt/greeting-context">
+            <label>Greeting Context</label>
+            <description>Provides context about how to greet users with the McpHelloWorld app</description>
+        </mcp-prompt>
+        <mcp-prompt name="usage-guide" url="http://host.docker.internal:3333/mcp/prompt/usage-guide">
+            <label>Usage Guide</label>
+            <description>Step-by-step guide for using the McpHelloWorld MCP tools</description>
+        </mcp-prompt>
+    </mcp-prompts>
+    <mcp-resources>
+        <mcp-resource name="hello-world-status" uri="mcp-hello-world://status" url="http://host.docker.internal:3333/mcp/resource/status" mime-type="application/json">
+            <label>Hello World Status</label>
+            <description>Current status and configuration of the McpHelloWorld app</description>
+        </mcp-resource>
+        <mcp-resource name="hello-world-stats" uri="mcp-hello-world://stats" url="http://host.docker.internal:3333/mcp/resource/stats" mime-type="application/json">
+            <label>Hello World Stats</label>
+            <description>Request statistics for the McpHelloWorld app</description>
+        </mcp-resource>
+    </mcp-resources>
 </mcp>
