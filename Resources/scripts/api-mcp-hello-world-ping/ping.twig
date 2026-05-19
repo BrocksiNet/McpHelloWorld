@@ -1,6 +1,6 @@
 {% block response %}
-    {# Arguments are passed as POST form params by AppMcpToolExecutor #}
-    {% set args = hook.request.request.all('arguments') %}
+    {# AppMcpToolExecutor POSTs {arguments: {...}} — hook.request is the parsed POST array #}
+    {% set args = hook.request.arguments ?? {} %}
     {% set message = args.message ?? '' %}
 
     {% set response = services.response.json({

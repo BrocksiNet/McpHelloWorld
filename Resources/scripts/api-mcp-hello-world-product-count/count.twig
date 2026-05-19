@@ -1,5 +1,6 @@
 {% block response %}
-    {% set args = hook.request.request.all('arguments') %}
+    {# AppMcpToolExecutor POSTs {arguments: {...}} — hook.request is the parsed POST array #}
+    {% set args = hook.request.arguments ?? {} %}
     {% set filterActive = args.active ?? true %}
 
     {% set criteria = {
