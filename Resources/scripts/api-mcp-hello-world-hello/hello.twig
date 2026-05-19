@@ -1,0 +1,15 @@
+{% block response %}
+    {# Arguments are passed as POST form params by AppMcpToolExecutor #}
+    {% set args = hook.request.request.all('arguments') %}
+    {% set name = args.name ?? 'World' %}
+
+    {% set response = services.response.json({
+        success: true,
+        data: {
+            message: 'Hello, ' ~ name ~ '! Greetings from the McpHelloWorld app.',
+            timestamp: 'now'|date('c')
+        }
+    }) %}
+
+    {% do hook.setResponse(response) %}
+{% endblock %}

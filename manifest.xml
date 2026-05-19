@@ -4,7 +4,7 @@
     <meta>
         <name>McpHelloWorld</name>
         <label>MCP Hello World</label>
-        <description>A minimal app to test MCP tool integration</description>
+        <description>Minimal MCP app showing both extension patterns side-by-side: app scripts (no external server) and external webhook server (Node.js)</description>
         <author>shopware AG</author>
         <copyright>(c) by shopware AG</copyright>
         <version>1.0.0</version>
@@ -14,4 +14,7 @@
         <registrationUrl>http://host.docker.internal:3333/register</registrationUrl>
         <secret>test-secret-for-mcp-hello-world</secret>
     </setup>
+    <permissions>
+        <read>product</read>
+    </permissions>
 </manifest>

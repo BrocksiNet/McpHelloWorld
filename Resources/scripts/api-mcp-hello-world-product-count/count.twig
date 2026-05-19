@@ -1,0 +1,30 @@
+{% block response %}
+    {% set args = hook.request.request.all('arguments') %}
+    {% set filterActive = args.active ?? true %}
+
+    {% set criteria = {
+        filters: [{
+            type: 'equals',
+            field: 'active',
+            value: filterActive
+        }],
+        aggregations: [{
+            name: 'count',
+            type: 'count',
+            field: 'id'
+        }],
+        limit: 1
+    } %}
+
+    {% set result = services.store.aggregate('product', criteria) %}
+    {% set count = result.get('count').count %}
+
+    {% set response = services.response.json({
+        success: true,
+        data: {
+            count: count,
+            active: filterActive
+        }
+    }) %}
+    {% do hook.setResponse(response) %}
+{% endblock %}

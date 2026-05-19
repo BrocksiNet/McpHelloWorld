@@ -1,38 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mcp>
     <mcp-tools>
-        <mcp-tool name="hello" url="http://host.docker.internal:3333/mcp/hello">
-            <label>Hello World</label>
-            <description>Returns a hello world greeting</description>
+        <!-- Pattern A: Shopware app scripts (Twig, in-process, no external server) -->
+        <mcp-tool name="hello" url="/api/script/mcp-hello-world-hello">
+            <label>Hello World (app script)</label>
+            <description>Returns a hello world greeting — powered by a Shopware app script (Twig), no external server required</description>
             <input-schema>
                 <property name="name" type="string" description="Name to greet" required="false"/>
             </input-schema>
         </mcp-tool>
-        <mcp-tool name="ping" url="http://host.docker.internal:3333/mcp/ping">
-            <label>Ping</label>
-            <description>Returns a pong response with an optional message echo</description>
+        <mcp-tool name="ping" url="/api/script/mcp-hello-world-ping">
+            <label>Ping (app script)</label>
+            <description>Returns a pong response with an optional message echo — powered by a Shopware app script (Twig)</description>
+            <input-schema>
+                <property name="message" type="string" description="Optional message to echo back" required="false"/>
+            </input-schema>
+        </mcp-tool>
+        <mcp-tool name="product-count" url="/api/script/mcp-hello-world-product-count">
+            <label>Product Count (app script)</label>
+            <description>DEMO ONLY — example of DAL access from a Shopware app script (Twig). Returns the total number of active products. For production use, prefer shopware-entity-aggregate with a count aggregation instead.</description>
+            <input-schema>
+                <property name="active" type="boolean" description="Filter by active status (default: true)" required="false"/>
+            </input-schema>
+            <required-privileges>
+                <privilege>product:read</privilege>
+            </required-privileges>
+        </mcp-tool>
+
+        <!-- Pattern B: external Node.js webhook server (requires `node server.js`) -->
+        <mcp-tool name="hello-webhook" url="http://host.docker.internal:3333/mcp/hello">
+            <label>Hello World (Node.js webhook)</label>
+            <description>Returns a hello world greeting — proxied to an external Node.js webhook server via HMAC-signed HTTP POST</description>
+            <input-schema>
+                <property name="name" type="string" description="Name to greet" required="false"/>
+            </input-schema>
+        </mcp-tool>
+        <mcp-tool name="ping-webhook" url="http://host.docker.internal:3333/mcp/ping">
+            <label>Ping (Node.js webhook)</label>
+            <description>Returns a pong response — proxied to an external Node.js webhook server via HMAC-signed HTTP POST</description>
             <input-schema>
                 <property name="message" type="string" description="Optional message to echo back" required="false"/>
             </input-schema>
         </mcp-tool>
     </mcp-tools>
+
+    <!-- Prompts and resources are Node.js webhook only here for demonstration -->
     <mcp-prompts>
         <mcp-prompt name="greeting-context" url="http://host.docker.internal:3333/mcp/prompt/greeting-context">
-            <label>Greeting Context</label>
+            <label>Greeting Context (Node.js webhook)</label>
             <description>Provides context about how to greet users with the McpHelloWorld app</description>
         </mcp-prompt>
         <mcp-prompt name="usage-guide" url="http://host.docker.internal:3333/mcp/prompt/usage-guide">
-            <label>Usage Guide</label>
+            <label>Usage Guide (Node.js webhook)</label>
             <description>Step-by-step guide for using the McpHelloWorld MCP tools</description>
         </mcp-prompt>
     </mcp-prompts>
+
     <mcp-resources>
         <mcp-resource name="hello-world-status" uri="mcp-hello-world://status" url="http://host.docker.internal:3333/mcp/resource/status" mime-type="application/json">
-            <label>Hello World Status</label>
+            <label>Hello World Status (Node.js webhook)</label>
             <description>Current status and configuration of the McpHelloWorld app</description>
         </mcp-resource>
         <mcp-resource name="hello-world-stats" uri="mcp-hello-world://stats" url="http://host.docker.internal:3333/mcp/resource/stats" mime-type="application/json">
-            <label>Hello World Stats</label>
+            <label>Hello World Stats (Node.js webhook)</label>
             <description>Request statistics for the McpHelloWorld app</description>
         </mcp-resource>
     </mcp-resources>

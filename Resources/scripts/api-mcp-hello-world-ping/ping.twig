@@ -1,0 +1,16 @@
+{% block response %}
+    {# Arguments are passed as POST form params by AppMcpToolExecutor #}
+    {% set args = hook.request.request.all('arguments') %}
+    {% set message = args.message ?? '' %}
+
+    {% set response = services.response.json({
+        success: true,
+        data: {
+            pong: true,
+            echo: message,
+            timestamp: 'now'|date('c')
+        }
+    }) %}
+
+    {% do hook.setResponse(response) %}
+{% endblock %}
